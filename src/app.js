@@ -1,3 +1,4 @@
+import { Question } from "./question";
 import { isValue } from "./utils";
 import "./style.css";
 
@@ -20,10 +21,11 @@ function submitFormHandler(event) {
     submitBtn.disabled = true;
     console.log(question);
     // async request to server
-
-    // Очищаем поле, убираем ненужные классы, включаем кнопку
-    input.value = "";
-    input.classList = "";
-    submitBtn.disabled = false;
+    Question.create(question).then(function () {
+      // Очищаем поле, убираем ненужные классы, включаем кнопку
+      input.value = "";
+      input.classList = "";
+      submitBtn.disabled = false;
+    });
   }
 }
