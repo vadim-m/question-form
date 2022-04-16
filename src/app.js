@@ -6,6 +6,7 @@ const form = document.querySelector("#form");
 const input = form.querySelector("#question-input");
 const submitBtn = form.querySelector("#submit");
 
+window.addEventListener("load", Question.renderList);
 form.addEventListener("submit", submitFormHandler);
 
 function submitFormHandler(event) {
