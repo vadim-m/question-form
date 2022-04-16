@@ -12,7 +12,19 @@ export class Question {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-      });
+        question.id = response.name;
+        return question;
+      })
+      .then(addToLocalStorage);
   }
+}
+
+function addToLocalStorage(question) {
+  const allQuestions = getQuestonsFromLocaleStorage();
+  allQuestions.push(question);
+  localStorage.setItem("questions", JSON.stringify(allQuestions));
+}
+
+function getQuestonsFromLocaleStorage() {
+  return JSON.parse(localStorage.getItem("questions") || "[]");
 }
