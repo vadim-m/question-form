@@ -1,2 +1,3 @@
-alert("Test");
+import "./style.css";
+
 console.log("Test!");
