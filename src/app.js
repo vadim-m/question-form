@@ -46,9 +46,30 @@ function openModal() {
 function authFormHandler(event) {
   event.preventDefault();
 
+  const btn = event.target.querySelector("button");
   const email = event.target.querySelector("#email").value;
   const password = event.target.querySelector("#password").value;
-  authWithEmailAndPassword(email, password).then((token) => {
-    // здесь уже получение данных по токену из backend`a
-  });
+
+  btn.disabled = true;
+  authWithEmailAndPassword(email, password)
+    .then(Question.fetch)
+    .then(renderModalAfterAuth)
+    .then(() => (btn.disabled = false));
+}
+
+function renderModalAfterAuth(content) {
+  if (typeof content === "string") {
+    createModal("Ошибка авторизации", content);
+  } else {
+    const modal = document.querySelector(".modal");
+    mui.overlay("off", modal);
+    const loginBtn = document.querySelector(".login-btn");
+    loginBtn.classList.add("login-btn--green");
+    loginBtn.textContent = "Log in ✔";
+
+    createModal(
+      "Список вопросов из Firebse Database:",
+      Question.listToHTML(content)
+    );
+  }
 }

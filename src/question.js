@@ -19,6 +19,34 @@ export class Question {
       .then(Question.renderList);
   }
 
+  // получаем список вопросов по токену
+  static fetch(token) {
+    if (!token) {
+      console.log("токена нет");
+      return Promise.resolve(
+        "<p class='error'>Не удалось получить токен. Проверьте логин и пароль.</p>"
+      );
+    }
+
+    const url = `https://questionnaire-a04ac-default-rtdb.firebaseio.com/questions.json?auth=${token}`;
+
+    return fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        if (response && response.error) {
+          console.log("response.error");
+          return `"<p>${response.error}</p>"`;
+        }
+
+        return response
+          ? Object.keys(response).map((key) => ({
+              ...response[key],
+              id: key,
+            }))
+          : [];
+      });
+  }
+
   static renderList() {
     const questions = getQuestonsFromLocaleStorage();
 
@@ -30,6 +58,14 @@ export class Question {
     const list = document.querySelector("#list");
 
     list.innerHTML = htmlTemplate;
+  }
+
+  static listToHTML(questions) {
+    return questions.length
+      ? `<ol>${questions
+          .map((item) => `<li>${item.text} ${item.date} </li>`)
+          .join("")}</ol>`
+      : "<div>Вопросов в базе данных пока нет!</div>";
   }
 }
 
@@ -45,9 +81,9 @@ function getQuestonsFromLocaleStorage() {
 
 function toCard(question) {
   return `
-    <div class="mui--text-black-54">
+    <date class="mui--text-black-54">
       Дата вопроса: ${new Date(question.date).toLocaleDateString()}
-    </div>
+    </date>
     <div class="mui--text-black-54">
       ${question.text}
     </div>

@@ -51,15 +51,24 @@ button {
   margin-bottom: 5px;
 }
 
+.error {
+  color: #e57373;
+}
+
 .login-btn {
   margin-left: 5vw;
   text-transform: none;
 }
 
+.login-btn--green {
+  background-color: lightgreen;
+  color: black;
+}
+
 .modal {
-  height: 30vw;
-  width: 50vw;
-  padding: 20px;
+  min-width: 350px;
+  max-width: 80vw;
+  padding: 30px;
   position: relative;
   top: 50%;
   left: 50%;
