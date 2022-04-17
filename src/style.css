@@ -55,8 +55,22 @@ button {
   color: #e57373;
 }
 
+.firebase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.firebase p {
+  margin: 0;
+}
+
+.firebase span {
+  color: #ffa50e;
+}
+
 .login-btn {
-  margin-left: 5vw;
+  min-width: 70px;
   text-transform: none;
 }
 

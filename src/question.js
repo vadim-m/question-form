@@ -62,9 +62,17 @@ export class Question {
 
   static listToHTML(questions) {
     return questions.length
-      ? `<ol>${questions
-          .map((item) => `<li>${item.text} ${item.date} </li>`)
-          .join("")}</ol>`
+      ? `<div>${questions
+          .map(
+            (item) => `<date class="mui--text-black-54">
+              Дата вопроса: ${new Date(item.date).toLocaleDateString()}
+              </date>
+              <div class="mui--text-black-54">
+                ${item.text}
+              </div>
+              <br>`
+          )
+          .join("")}</div>`
       : "<div>Вопросов в базе данных пока нет!</div>";
   }
 }

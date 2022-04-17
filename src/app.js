@@ -61,15 +61,18 @@ function renderModalAfterAuth(content) {
   if (typeof content === "string") {
     createModal("Ошибка авторизации", content);
   } else {
+    // убираем модалку
     const modal = document.querySelector(".modal");
     mui.overlay("off", modal);
+
+    // меняем кнопку log in
     const loginBtn = document.querySelector(".login-btn");
     loginBtn.classList.add("login-btn--green");
     loginBtn.textContent = "Log in ✔";
+    login.disabled = true;
 
-    createModal(
-      "Список вопросов из Firebse Database:",
-      Question.listToHTML(content)
-    );
+    // вставляем полученный список вопрос из firebase
+    const firebaseList = document.querySelector("#firebase-list");
+    firebaseList.innerHTML = Question.listToHTML(content);
   }
 }
