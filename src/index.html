@@ -13,7 +13,6 @@
 <body>
   <div id="sidebar">
     <div class="mui--text-white mui--text-display1 mui--align-vertical">Список вопросов</div>
-
   </div>
   <div id="content" class="mui-container-fluid">
     <div class="mui-row">
@@ -24,6 +23,7 @@
         <div class="mui-divider"></div>
         <br>
 
+
         <form class="mui-form" id="form">
           <div class="mui-textfield mui-textfield--float-label">
             <input type="text" id="question-input" required minlength="10" maxlength="256">
@@ -32,14 +32,16 @@
           <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary" id="submit">Задать вопрос</button>
         </form>
         <br>
-
-        <div class="mui--text-black-54 mui--text-body2">Ваши вопросы:</div>
+        <div class="mui--text-black-54 mui--text-body2">Ваши вопросы из LocaleStorage:</div>
         <div class="mui-divider"></div>
         <br>
 
-        <div id="list">
-
+        <div id="list"></div>
+        <br>
+        <div class="mui--text-black-54 mui--text-body2">Показать все вопросы из Firebase (нужна авторизация):
+          <button class="mui-btn mui-btn--small mui-btn--primary login-btn" id="login-btn">Log in</button>
         </div>
+        <div class="mui-divider"></div>
         <br>
 
       </div>
